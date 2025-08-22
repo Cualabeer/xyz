@@ -9,23 +9,12 @@
 <body class="p-4">
 <h1>Super Admin Dashboard</h1>
 
-<!-- Table Management -->
 <div id="tableManagerContainer" class="mb-4"></div>
-
-<hr>
-
-<!-- Users Management -->
 <div id="usersManagerContainer" class="mb-4"></div>
-
-<!-- Customers Management -->
 <div id="customersManagerContainer" class="mb-4"></div>
-
-<!-- Garage Management -->
 <div id="garageManagerContainer" class="mb-4"></div>
-
 <div id="result"></div>
 
-<!-- JS Modules -->
 <script type="module">
 import { initTableManager } from './js/tableManager.js';
 import { initUsersManager } from './js/usersManager.js';
@@ -35,7 +24,6 @@ import { initGarageManager } from './js/garageManager.js';
 const API_URL = 'https://YOUR-RENDER-BACKEND.onrender.com';
 const SUPER_ADMIN_KEY = 'supersecretkey';
 
-// Initialize modules
 initTableManager('tableManagerContainer', API_URL, SUPER_ADMIN_KEY);
 initUsersManager('usersManagerContainer', API_URL, SUPER_ADMIN_KEY);
 initCustomersManager('customersManagerContainer', API_URL, SUPER_ADMIN_KEY);
