@@ -1,8 +1,9 @@
-import { API_URL, SUPER_ADMIN_KEY } from './appConfig.js';
+import { API_URL } from './appConfig.js';
+import { getSuperAdminKey } from './authManager.js';
 
 async function fetchDB() {
-  const res = await fetch(`${API_URL}/api/status`, {
-    headers: { 'super-admin-key': SUPER_ADMIN_KEY }
+  const res = await fetch(`${API_URL}/status`, {
+    headers: { 'super-admin-key': getSuperAdminKey() }
   });
   return res.json();
 }
@@ -13,9 +14,9 @@ export async function renderStatus() {
     const s = await fetchDB();
     const db = s.dbConnected ? '<span class="text-success">Connected</span>' : '<span class="text-danger">Not connected</span>';
     const tables = Object.entries(s.tables || {})
-      .map(([k, v]) => `<li class="${v === 'ready' ? 'text-success' : 'text-danger'}">${k}: ${v}</li>`).join('');
+      .map(([k,v]) => `<li class="${v==='ready'?'text-success':'text-danger'}">${k}: ${v}</li>`).join('');
     root.innerHTML = `<p>Database: ${db}</p><ul>${tables}</ul>`;
-  } catch (e) {
+  } catch(e) {
     root.innerHTML = `<p class="text-danger">Failed to fetch DB status</p>`;
   }
 }
